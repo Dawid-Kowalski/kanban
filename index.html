@@ -4,13 +4,26 @@
 		<meta charset="utf-8">
 		<title>kanban</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script type="text/javascript" src="js/script.js"></script>
 	</head>
 	<body>
 		<div id="board" class="board">
-	    <h1>tablica kanban</h1>
-	    <button class="create-column">dodaj kolumne</button>
-	    <div class="columns"></div>
+		    <h1>tablica kanban</h1>
+		    <button class="create-column">dodaj kolumne</button>
+		    <div class="columns" id="columns">
+		    </div>
 		</div>
+
+
+		<script id="template-column" type="x-tmpl-mustache">
+		    <div>
+		        <h2>{{id}}</h2>
+		        <ul></ul>
+		        <button>X</button>
+		        <button>Add a card</button>
+		    </div>
+		</script>
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
 	</body>
 </html>
