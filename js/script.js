@@ -27,9 +27,13 @@ function generateID() {
 
 function addColumn() {
 
-  	generateID();
-
   	let columnName = prompt("podaj nazwę kolumny");
+
+  	if(columnName == null) {
+  		return;
+  	}
+
+  	generateID();
 
   	let newColumn = new Column(uniqueID, columnName);
   	newColumn.create();
