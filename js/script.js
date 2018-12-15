@@ -1,23 +1,36 @@
-document.addEventListener("DOMContentLoaded", function() {
-
-	let uniqueID = 0;
+let uniqueID = 0;
     
-    data = 	{
-    			id: 10
-    		}
+function Column (id, name) {
+	this.id = id;
+	this.name = name;
+}
 
+Column.prototype = {
 
-    function generateID () {
-    	uniqueID++;
-    	return uniqueID;
-    }
+	create: function() {
+		let template = document.getElementById("template-column").innerHTML;
+ 		let columns = document.getElementById("columns");
+  		let element = document.createElement("td");
 
- 	let template = document.getElementById("template-column").innerHTML;
- 	let columns = document.getElementById("columns");
-  	let element = document.createElement("div");
+  		Mustache.parse(template);
 
-  	Mustache.parse(template);
-  	element.innerHTML = Mustache.render(template, data);
+  		element.innerHTML = Mustache.render(template, this);
 
-  	columns.appendChild(element);
-});
+  		columns.appendChild(element);
+	}
+}
+
+function generateID() {
+    uniqueID++;
+    return uniqueID;
+}
+
+function addColumn() {
+
+  	generateID();
+
+  	let columnName = prompt("podaj nazwę kolumny");
+
+  	let newColumn = new Column(uniqueID, columnName);
+  	newColumn.create();
+}

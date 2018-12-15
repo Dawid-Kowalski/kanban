@@ -8,18 +8,21 @@
 	<body>
 		<div id="board" class="board">
 		    <h1>tablica kanban</h1>
-		    <button class="create-column">dodaj kolumne</button>
-		    <div class="columns" id="columns">
-		    </div>
+		    <button class="create-column" onclick="addColumn();">dodaj kolumne</button>
+		    <table class="columns">
+		    	<tr id="columns">
+
+		    	</tr>
+		    </table>
 		</div>
 
 
 		<script id="template-column" type="x-tmpl-mustache">
-		    <div>
-		        <h2>{{id}}</h2>
-		        <ul></ul>
+		    <div class="column" id={{id}}>
+		        <h2>{{name}}</h2>
+		        <button>dodaj zadanie</button>
 		        <button>X</button>
-		        <button>Add a card</button>
+		        <ul></ul>
 		    </div>
 		</script>
 
