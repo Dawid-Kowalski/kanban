@@ -27,7 +27,7 @@ Column.prototype = {
 
   		newColumnHTML.addEventListener("click", function (event) {
    			
-   			if (event.target.classList.contains("btn-delete")) {
+   			if (event.target.classList.contains("btn-col-delete")) {
       			self.removeColumn();
     		}
 
@@ -49,6 +49,9 @@ Column.prototype = {
     	});
 
   		columns.appendChild(newColumnHTML);
+
+  		let el = document.getElementById(this.id);
+		let sortable = Sortable.create(el);
 	},
 
 	removeColumn: function() {
@@ -75,8 +78,22 @@ Task.prototype = {
 
   		newTaskHTML.id = this.id;
 
+  		newTaskHTML.addEventListener("click", function (event) {
+   			
+   			if (event.target.classList.contains("btn-task-delete")) {
+      			self.removeTask(column);
+    		}
+
+    	});
+
   		columnHTML.appendChild(newTaskHTML);
-	}
+	},
+
+	removeTask: function(column) {
+      	let taskToDel = document.getElementById(this.id);
+      	let columnHTML = document.getElementById(column.id);
+      	columnHTML.removeChild(taskToDel);
+    }
 }
 
 function generateID() {
