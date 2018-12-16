@@ -32,7 +32,18 @@ Column.prototype = {
     		}
 
     		if (event.target.classList.contains("add-task")) {
-   				addTask();
+   				
+   				let taskName = prompt("podaj nazwę zadania");
+
+			  	if(taskName == null) {
+			  		return;
+			  	}
+
+  				generateID();
+
+  				let newTask = new Task(uniqueID, taskName);
+   				
+   				newTask.create(self);
     		}
 
     	});
@@ -45,6 +56,27 @@ Column.prototype = {
       	let columnsHTML = document.getElementById("columns");
       	columns.removeChild(columnToDel);
     }
+}
+
+
+Task.prototype = {
+
+	create: function(column) {
+
+		let self = this;
+
+		let template = document.getElementById("template-task").innerHTML;
+ 		let columnHTML = document.getElementById(column.id);
+  		let newTaskHTML = document.createElement("div");
+
+  		Mustache.parse(template);
+
+  		newTaskHTML.innerHTML = Mustache.render(template, self);
+
+  		newTaskHTML.id = this.id;
+
+  		columnHTML.appendChild(newTaskHTML);
+	}
 }
 
 function generateID() {
@@ -64,17 +96,4 @@ function addColumn() {
 
   	let newColumn = new Column(uniqueID, columnName);
   	newColumn.create();
-}
-
-function addTask() {
-
-  	let taskName = prompt("podaj nazwę zadania");
-
-  	if(taskName == null) {
-  		return;
-  	}
-
-  	generateID();
-
-  	let newTask = new Task(uniqueID, taskName);
 }
