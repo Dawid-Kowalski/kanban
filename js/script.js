@@ -25,10 +25,16 @@ Column.prototype = {
 
   		newColumnHTML.id = this.id;
 
-  		newColumnHTML.addEventListener('click', function (event) {
-   			if (event.target.classList.contains('btn-delete')) {
+  		newColumnHTML.addEventListener("click", function (event) {
+   			
+   			if (event.target.classList.contains("btn-delete")) {
       			self.removeColumn();
     		}
+
+    		if (event.target.classList.contains("add-task")) {
+   				addTask();
+    		}
+
     	});
 
   		columns.appendChild(newColumnHTML);
@@ -58,4 +64,17 @@ function addColumn() {
 
   	let newColumn = new Column(uniqueID, columnName);
   	newColumn.create();
+}
+
+function addTask() {
+
+  	let taskName = prompt("podaj nazwę zadania");
+
+  	if(taskName == null) {
+  		return;
+  	}
+
+  	generateID();
+
+  	let newTask = new Task(uniqueID, taskName);
 }
