@@ -5,6 +5,11 @@ function Column (id, name) {
 	this.name = name;
 }
 
+function Task (id, text) {
+	this.id = "id"+id;
+	this.text = text;
+}
+
 Column.prototype = {
 
 	create: function() {
