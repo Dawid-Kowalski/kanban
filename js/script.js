@@ -14,7 +14,7 @@ Column.prototype = {
 
 	create: function() {
 		let template = document.getElementById("template-column").innerHTML;
- 		let columnsHTML = document.getElementById("columns");
+ 		let columnsHTML = document.getElementById("table");
   		let newColumnHTML = document.createElement("td");
 
   		Mustache.parse(template);
@@ -45,13 +45,12 @@ Column.prototype = {
    				
    				newTask.create(self);
     		}
-
     	});
 
   		columns.appendChild(newColumnHTML);
 
-  		let el = document.getElementById(this.id);
-		let sortable = Sortable.create(el);
+  		let sortableColumn = document.getElementById("columns");
+		let sortableCol = Sortable.create(sortableColumn);
 	},
 
 	removeColumn: function() {
@@ -87,6 +86,11 @@ Task.prototype = {
     	});
 
   		columnHTML.appendChild(newTaskHTML);
+
+  		let el = document.getElementById(column.id);
+		let sortable = Sortable.create(el, {
+		    group: "tasks",
+		});
 	},
 
 	removeTask: function(column) {
@@ -114,3 +118,4 @@ function addColumn() {
   	let newColumn = new Column(uniqueID, columnName);
   	newColumn.create();
 }
+

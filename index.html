@@ -10,15 +10,14 @@
 		<div id="board" class="container board">
 		    <h1>tablica kanban</h1>
 		    <button class="create-column btn btn-primary" onclick="addColumn();">dodaj kolumne</button>
-		    <table class="columns table" id="table">
+		    <table class="columns table">
 		    	<tr id="columns">
-
 		    	</tr>
 		    </table>
 		</div>
 
 		<script id="template-column" type="x-tmpl-mustache">
-			<h2 class="inline">{{name}}</h2>
+			<h2 class="inline ignore-by-drag-task">{{name}}</h2>
 			<button class="add-task btn btn-success">dodaj zadanie</button>
 			<button  class="btn-col-delete btn btn-danger">X</button>
 		</script>
