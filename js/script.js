@@ -1,7 +1,7 @@
 let uniqueID = 0;
     
 function Column (id, name) {
-	this.id = id;
+	this.id = "id"+id;
 	this.name = name;
 }
 
@@ -9,15 +9,31 @@ Column.prototype = {
 
 	create: function() {
 		let template = document.getElementById("template-column").innerHTML;
- 		let columns = document.getElementById("columns");
-  		let element = document.createElement("td");
+ 		let columnsHTML = document.getElementById("columns");
+  		let newColumnHTML = document.createElement("td");
 
   		Mustache.parse(template);
 
-  		element.innerHTML = Mustache.render(template, this);
+  		newColumnHTML.innerHTML = Mustache.render(template, this);
 
-  		columns.appendChild(element);
-	}
+  		let self = this;
+
+  		newColumnHTML.id = this.id;
+
+  		newColumnHTML.addEventListener('click', function (event) {
+   			if (event.target.classList.contains('btn-delete')) {
+      			self.removeColumn();
+    		}
+    	});
+
+  		columns.appendChild(newColumnHTML);
+	},
+
+	removeColumn: function() {
+      	let columnToDel = document.getElementById(this.id);
+      	let columnsHTML = document.getElementById("columns");
+      	columns.removeChild(columnToDel);
+    }
 }
 
 function generateID() {
