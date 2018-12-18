@@ -17,11 +17,18 @@
 		</div>
 
 		<script id="column-template" type="x-tmpl-mustache">
-			<td id="{{id}}">
+			<div>
 				<h2 class="inline">{{name}}</h2>
-				<button class="btn btn-success">dodaj zadanie</button>
-				<button  class="btn btn-danger" id="{{buttonID}}">X</button>
-			</td>
+				<button class="btn btn-success" id="{{buttonAddTaskID}}">dodaj zadanie</button>
+				<button  class="btn btn-danger" id="{{buttonDelID}}">X</button>
+			</div>
+		</script>
+
+		<script id="task-template" type="x-tmpl-mustache">
+			<div>
+				<h2 class="inline">{{name}}</h2>
+				<button  class="btn btn-danger" id="{{buttonDelID}}">X</button>
+			</div>
 		</script>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
