@@ -1,56 +1,61 @@
 let uniqueID = 0;
     
-function Column (id, name) {
+function Column (id, name, buttonID) {
 	this.id = "id"+id;
 	this.name = name;
+  this.buttonID = "id" + buttonID;
+  this.button;
 }
 
-function Task (id, text) {
+/*function Task (id, text) {
 	this.id = "id"+id;
 	this.text = text;
 }
+*/
 
 Column.prototype = {
 
 	create: function() {
+
+    let self = this;
+
 		let template = document.getElementById("template-column").innerHTML;
- 		let columnsHTML = document.getElementById("table");
-  		let newColumnHTML = document.createElement("td");
+ 		let columnsHTML = document.getElementById("columns");
 
-  		Mustache.parse(template);
+  	Mustache.parse(template);
 
-  		newColumnHTML.innerHTML = Mustache.render(template, this);
+    columnsHTML.innerHTML += Mustache.render(template, this);
 
-  		let self = this;
+    this.button = document.getElementById(this.buttonID);
+    console.log(this.button);
 
-  		newColumnHTML.id = this.id;
+  	this.button.addEventListener("click", function (event) {
+        alert(self.name);
+    });
 
-  		newColumnHTML.addEventListener("click", function (event) {
-   			
-   			if (event.target.classList.contains("btn-col-delete")) {
-      			self.removeColumn();
-    		}
+    console.log(this.button);
+/*   			
+   	  if (event.target.classList.contains("btn-col-delete")) {
+      	 self.removeColumn();
+      }
 
-    		if (event.target.classList.contains("add-task")) {
+      if (event.target.classList.contains("add-task")) {
    				
-   				let taskName = prompt("podaj nazwę zadania");
+   		   let taskName = prompt("podaj nazwę zadania");
 
-			  	if(taskName == null) {
-			  		return;
-			  	}
+			   if(taskName == null) {
+			  	return;
+			   }
 
-  				generateID();
+  		  generateID();
 
-  				let newTask = new Task(uniqueID, taskName);
+  		  let newTask = new Task(uniqueID, taskName);
    				
-   				newTask.create(self);
-    		}
-    	});
+   		 newTask.create(self);
+      }
+*/
 
-  		columns.appendChild(newColumnHTML);
-
-  		let sortableColumn = document.getElementById("columns");
-		let sortableCol = Sortable.create(sortableColumn);
+		let sortableCol = Sortable.create(columnsHTML);
 	},
 
 	removeColumn: function() {
@@ -60,7 +65,7 @@ Column.prototype = {
     }
 }
 
-
+/*
 Task.prototype = {
 
 	create: function(column) {
@@ -99,6 +104,7 @@ Task.prototype = {
       	columnHTML.removeChild(taskToDel);
     }
 }
+*/
 
 function generateID() {
     uniqueID++;
@@ -114,8 +120,12 @@ function addColumn() {
   	}
 
   	generateID();
+    let columnID = uniqueID;
+    generateID();
+    let buttonID = uniqueID;
 
-  	let newColumn = new Column(uniqueID, columnName);
+  	let newColumn = new Column(columnID, columnName, buttonID);
+    console.log("id:" + columnID + "button:" + buttonID)
   	newColumn.create();
 }
 
